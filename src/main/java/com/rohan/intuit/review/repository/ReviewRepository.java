@@ -2,6 +2,7 @@ package com.rohan.intuit.review.repository;
 
 import com.rohan.intuit.review.entity.Review;
 import com.rohan.intuit.review.response.repository.ProductReviews;
+import com.rohan.intuit.review.response.repository.RatingDetails;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,11 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query(value = "select rating from Review where product_id=?1")
     List<Integer> findRatingsByProductId(Long productId);
+
+
+    @Query(value = "select r.rating, b.certified_buyer as certifiedBuyer from review r inner join buyer b on " +
+            "r.buyer_id=b.id where r.product_id = ?1", nativeQuery = true)
+    List<RatingDetails> findRatingDataByProductId(Long productId);
 
     Review findByBuyerIdAndProductId(Long buyerId, Long productId);
 }

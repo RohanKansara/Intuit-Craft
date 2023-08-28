@@ -1,7 +1,8 @@
 package com.rohan.intuit.review.entity;
 
 import javax.persistence.*;
-
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import lombok.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,6 +24,8 @@ public class Review {
     private Long id;
 
     @Column(nullable = false)
+    @Min(1)
+    @Max(5)
     private int rating;
 
     @Column(length = 1000)

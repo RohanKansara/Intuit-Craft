@@ -26,4 +26,8 @@ public class DBSellerRepositoryService {
 
         return seller.orElseThrow(()-> new SellerException("Invalid Seller, Seller Dosent Exist"));
     }
+
+    public Seller addSeller(Seller seller) {
+        return sellerRepository.save(seller);
+    }
 }

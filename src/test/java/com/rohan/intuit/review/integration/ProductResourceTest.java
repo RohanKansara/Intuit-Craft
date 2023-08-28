@@ -1,4 +1,4 @@
-package com.rohan.intuit.review.resource;
+package com.rohan.intuit.review.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rohan.intuit.review.entity.Product;

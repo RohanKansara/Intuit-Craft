@@ -2,6 +2,7 @@ package com.rohan.intuit.review.service;
 
 import com.rohan.intuit.review.entity.Buyer;
 import com.rohan.intuit.review.repository.BuyerRepository;
+import com.rohan.intuit.review.repository.db.DBBuyerRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +10,9 @@ import org.springframework.stereotype.Service;
 public class BuyerService {
 
     @Autowired
-    BuyerRepository buyerRepository;
+    DBBuyerRepositoryService dbBuyerRepositoryService;
 
     public Buyer createrBuyer(Buyer buyer) {
-        return buyerRepository.save(buyer);
+        return dbBuyerRepositoryService.addBuyer(buyer);
     }
 }

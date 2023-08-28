@@ -19,4 +19,8 @@ public class DBBuyerRepositoryService {
 
         return buyer.orElseThrow(()-> new BuyerException("Invalid Buyer, Buyer Dosent Exist"));
     }
+
+    public Buyer addBuyer(Buyer buyer) {
+        return buyerRepository.save(buyer);
+    }
 }

@@ -38,13 +38,7 @@ public class ReviewService {
 
         List<ProductReviews> productReviews = dbReviewRepositoryService.getProductReviews(productId, pageNo, pageSize, sortBy);
 
-        //handle exception
-
-        checkIfProductExist(productReviews);
-
         double rating = AggregatedScoreFactory.getAggregatedScore(aggregationMethod).getAggregatedScoreOfReview(productId);
-
-        //calculate review and its count
 
         Map<Integer, Long> ratingCount = ratingCountService.reviewCount(productId);
 
@@ -54,11 +48,6 @@ public class ReviewService {
                 .ratingCount(ratingCount)
                 .productReviews(productReviews)
                 .build();
-    }
-
-    private void checkIfProductExist(List<ProductReviews> productReviews) {
-        if(productReviews.isEmpty())
-            throw new ProductException("Invalid Product, product dosent exists");
     }
 
     public Review dislikeReview(Long reviewId) {

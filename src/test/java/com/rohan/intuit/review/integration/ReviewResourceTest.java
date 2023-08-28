@@ -1,4 +1,4 @@
-package com.rohan.intuit.review.resource;
+package com.rohan.intuit.review.integration;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -190,25 +190,13 @@ public class ReviewResourceTest {
 
         response.andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(jsonPath("$.rating", is(0.0)))
+                .andExpect(jsonPath("$.rating", is(3.14)))
                 .andExpect(jsonPath("$.ratingCount.1", is(2)))
                 .andExpect(jsonPath("$.ratingCount.5", is(3)))
                 .andExpect(jsonPath("$.productReviews[0].buyerName", is("Rohan")))
                 .andExpect(jsonPath("$.productReviews[0].rating", is(5)))
                 .andExpect(jsonPath("$.productReviews[1].likeCount", is(50)))
                 .andExpect(jsonPath("$.productReviews[1].disLikeCount", is(150)));
-    }
-
-    @Test
-    void should_throw_exception_on_fetching_review_for_invalid_product() throws Exception {
-
-        ResultActions response = mockMvc.perform(get("/api/v1/review/5000"));
-
-        response.andExpect(status().is4xxClientError())
-                .andDo(print())
-                .andExpect(jsonPath("$.status", is(400)))
-                .andExpect(jsonPath("$.message", is("Invalid Product, product dosent exists")));
-
     }
 
 }

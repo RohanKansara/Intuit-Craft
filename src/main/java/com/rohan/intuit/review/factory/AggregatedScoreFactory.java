@@ -14,7 +14,7 @@ import java.util.Map;
 public class AggregatedScoreFactory {
 
     @Autowired
-    private List<AggregatedScore> aggregatedScore;
+        private List<AggregatedScore> aggregatedScore;
 
     private static final Map<AggregationMethod, AggregatedScore> aggregatedScoreMap = new HashMap<>();
 

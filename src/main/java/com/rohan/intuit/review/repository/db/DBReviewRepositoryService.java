@@ -1,13 +1,12 @@
 package com.rohan.intuit.review.repository.db;
 
 import com.rohan.intuit.review.entity.Review;
-import com.rohan.intuit.review.exception.BuyerException;
 import com.rohan.intuit.review.exception.ReviewException;
 import com.rohan.intuit.review.repository.ReviewRepository;
 import com.rohan.intuit.review.request.ProductReview;
 import com.rohan.intuit.review.response.repository.ProductReviews;
+import com.rohan.intuit.review.response.repository.RatingDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -62,7 +61,12 @@ public class DBReviewRepositoryService {
         return reviewRepository.findRatingsByProductId(productId);
     }
 
-    public Review likeReview(Long reviewId) {
+    @Cacheable(value = "productRatingsForWA", key = "#productId")
+    public List<RatingDetails> findRatingsDataByProductId(Long productId) {
+        return reviewRepository.findRatingDataByProductId(productId);
+    }
+
+        public Review likeReview(Long reviewId) {
         Review review = findReview(reviewId);
 
         review.setLikeCount(review.getLikeCount() + 1);
